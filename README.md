@@ -1,50 +1,90 @@
-# Introduction
+Introduction
+------------
 
-The IPython Bundle is a collection of commands designed to help you work with IPython form within TextMate. It was started after seeing [UsingIPythonWithTextMate](http://ipython.scipy.org/moin/Cookbook/UsingIPythonWithTextMate "Cookbook/UsingIPythonWithTextMate - IPython"), which contained the core commands on which very early versions of this bundle were based. Kudos to Barry Wark for writing the commands on the wiki page.
+The IPython Bundle is a collection of commands designed to help you work with IPython from within TextMate. Most commands appear under a menu invoked by the shortcut `⌃⇧I` (Shift + Ctrl + I) when editing Python source code files. Some snippets for scientific Python packages such as SciPy, NumPy and matplotlib are provided as well, as IPython is part of the SciPy project and includes special support for working with these libraries to present a Matlab-like environment for scientific computing.
 
-The bundle now uses a socket based server based on [Twisted](http://twistedmatrix.com/trac/ "Twisted"). You may need to run `sudo easy_install twisted` for this to work. Please see the section 'Socket Support' for more information on how to set up the IPython side of things. The applescript commands are still available as a backup, and are used to interact with `pdb`. If you prefer the applescript based approack over the socket based approach, the commands are available in the `AppleScript Commands` group.
+See the Installation section below if you're viewing this document on the web and have not already installed the bundle.
 
-Currently most commands are aliased to the shortcut `⌃⇧I` (Shift + Ctrl + I), and will only activate when the scope is `source.python`. The commands `Edit ipythonrc` and `View config directory` are available in all scopes. The exceptions to this rule are the commands for opening IPython and editing configuration files.
+Please be aware that this bundle currently knows **nothing** of the state of the running IPython. This means that repeated calls may not have the effect you expected. This may change in future versions.
 
-Please be aware that this bundle current knows **nothing** of the state of the running IPython. This means that repeated calls may not have the effect you expected. This may change in future versions.
 
-# Bundle configuration
+Usage
+-----
 
-If you wish to specify the arguments with which `ipython` is run, you can set `TM_IPYTHON` in TextMate's preferences. I recommend setting this variable to `ipthon -pylab -wthread`. This will be honoured by the applescript based commands, most importantly `Open IPython`, which spawns a new Terminal, runs IPython and injects the code needed to start a server. The session name used for the server can be set in the `Preferences` part of the bundle (by using the Bundle Editor), and is set to `ipython-session` by default. For this reason, it is probably not sensible to use `Open Ipython` more than once.
+### Running Code and Viewing State ###
 
-# Socket Support
+To get started, open or create a Python file, invoke the `⌃⇧I` shortcut and choose `Open IPython` from the menu. This will open a Terminal window with an IPython session, and you should see an initial series of statements successfully executed to establish client/server communication with TextMate.
 
-Socket support is still **work in progress**. That said, most of the bundle commands use this functionality, and work well.
+Now you can invoke `⌃⇧I` again to run your file or selected lines in IPython, and afterward ask for a variable listing to inspect states after the execution.
 
-To set up a socket server, fire up IPython, and type:
+### Debugging ###
+
+From TextMate you can toggle on and off automatic entering of the `pdb` [debugger][] when exceptions occur, set and clear breakpoints, and invoke a post-mortem debugger to load the context of the last exception that occurred, in case you forgot to turn on `pdb` beforehand.
+
+[debugger]: http://docs.python.org/library/pdb.html#debugger-commands
+
+### Snippets ###
+
+As usual, you can open the Bundle Editor to explore the completion snippets provided by the bundle, currently comprised of Scipy-, matplotlib- and Enthought Tool Suite-related code.
+
+### Configuration Files ###
+
+A simple language grammar for highlighting `ipythonrc` files in also included. You can switch the language grammar to the `ipythonrc` type by pressing `⌃⌥⇧I` (Shift + Cmd + Alt + I). A bundle command is also available for easy editing of the `ipythonrc` and `ipy_user.conf` files (provided they live under `~/.ipython`).
+
+
+How It Works
+------------
+
+The bundle uses a socket-based server distributed with IPython to communicate with the interpreter. Socket support is still **work in progress**. That said, most of the bundle commands use this functionality, and work well.
+
+A few commands such as some debugger control use AppleScript, and old AppleScript versions of other commands are still available in case you have trouble with the socket server. In this case, the AppleScript commands are available in the `AppleScript Commands` group in the Menu Structure section of the Bundle Editor -- you can add the `⌃⇧I` keyboard activation to have these appear in the menu you, or you can always invoke them from the `Select Bundle Item` dialog (⌃⌘T).
+
+
+Bundle Configuration
+--------------------
+
+A few aspects of bundle functionality can be configured by setting environment variables in `Preferences > Advanced > Shell Variables` in TextMate, as follows.
+
+### How IPython is Run ###
+
+If you wish to specify the arguments with which `ipython` is run, or give a path to an `ipython` executable in a virtualenv, you may set `TM_IPYTHON` in TextMate's preferences. I recommend setting this variable to `ipython -pylab -wthread` for loading IPython's special support for SciPy/matplotlib.
+
+
+### Socket Server and Initialization ###
+
+The editor server creates a UNIX socket file in `~/.ipython`. By default, it is named `textmate-session` -- if you should wish to change this for some reason, set `TM_IPYTHON_DEFAULT_SESSION`.
+
+`TM_IPYTHON_DEFAULT_SESSION` will only be interpreted as a string, so it cannot be a dynamic value and thus the bundle normally supports a single IPython session running at a time. If you would like to try interacting with multiple sessions -- perhaps you have two TextMate projects open and wish to run different IPython sessions for each of them -- you can set a custom initialization routine in `TM_IPYTHON_START_SERVER_COMMAND`.
+
+By default, `TM_IPYTHON_START_SERVER_COMMAND` is essentially this:
+
+    import ipy_vimserver; ipy_vimserver.setup("textmate-session")
+
+`ipy_vimserver.py` is distributed with IPython and is made available in the load path by default. To run multiple sessions, you might try setting the variable at TM project level to something like:
+
+    import os; import ipy_vimserver; ipy_vimserver.setup('session-%s' % os.path.basename(os.environ['TM_PROJECT_DIRECTORY']))
+
+Alternatively, you could handle session setup this way in your `~/ipython/ipy_user_conf.py` file and then omit usage of the `Open IPython` bundle command -- the bundle will try to find sockets in `~/.ipython` when you run commands.
+
+This bundle may include additional support for interacting with multiple sessions in the future, but for now this is largely untested.
+
+<!-- TODO: include the Twisted-based server in the bundle and document here -->
+
+Troubleshooting
+---------------
+
+The above information on session initialization configuration gives some hint as to how you might attempt to troubleshoot if you have problems -- probably, issues would relate to connection to the socket server, so you can try to set it up manually and look for errors. Run `ipython` manually in a terminal and enter:
 
     import ipy_vimserver
-    ipy_vimserver.setup('sessionname')
+    ipy_vimserver.setup('socketname')
 
-This will create a unix socket called `socketname`, in `~/.ipython/` which you can then connect to using the bundle's `Connect to IPYthon server command`.
+This will create a unix socket called `socketname`, in `~/.ipython/`. If there are no errors, try to run the bundle's `Test Connection to IPython Server` command, and success or failure should be reported in a window.
 
-Alternatively, if you're using an IPython version with a generic editor branch, start an editor server session. You can set `TM_IPYTHON_START_SERVER_COMMAND` to the commands needed to start the kind of session you need.
-
-This bundle should detect the existence of multiple sessions and ask which to
-connect to. Please note it is not currently possible to send text to multiple
-IPython servers at once, but there is no reason why it shouldn't be possible in future.
-
-The command `Open IPython` will open a terminal and start the server up for you. In addition, it should be fairly easy to add these commands to your config file. 
-
-To make this more robust, using something like: 
-
-    import ipy_vimserver
-    ipy_vimserver.setup('session-%6x' % time.time())
-
-Will give you a time-dependent socket name (with no extra `.` chars).
-
-# Configuration Files
-
-A simple language grammar for highlighting `ipythonrc` files in also included.
-You can switch the language grammar to the `ipythonrc` type by pressing `⌃⌥⇧I` (Shift + Cmd + Alt + I). A bundle command is also available for easy editing of the `ipythonrc` and `ipy_user.conf` files (provided they live under `~/.ipython`).
+You could also try the AppleScript versions of some commands, as discussed above.
 
 
-# Installation
+Installation
+------------
 
 This bundle is best installed using GetBundles. You can also clone it from GitHub, or download a tarball.
 
@@ -63,13 +103,34 @@ To use GetBundles:
 
 It is also advisable to update the support directory, which can be done using the `Advanced Drawer` in GetBundles.
 
-# Help, Suggestions or Feature Requests
 
-For help, please use the [Google Group](groups.google.com/group/ipython-tmbundle/), for suggestions, feature requests, bug reports or patches, please post to the [IPython-dev mailing list](http://projects.scipy.org/mailman/listinfo/ipython-dev "IPython-dev Info Page"), please prefix the subject line with `[TextMate]`.
+Acknowledgements
+----------------
 
-# Useful Links
+The bundle was started after seeing [UsingIPythonWithTextMate][], containing the AppleScripts on which the core commands of early versions of this bundle were based and which are still available as an alternative to the socket server for some features. Kudos to Barry Wark for writing and sharing these.
+
+[UsingIPythonWithTextMate]: http://ipython.scipy.org/moin/Cookbook/UsingIPythonWithTextMate "Cookbook/UsingIPythonWithTextMate - IPython"
+
+
+Help, Suggestions or Feature Requests
+-------------------------------------
+
+For help, please use the [Google Group][], for suggestions, feature requests, bug reports or patches, please post to the [IPython-dev mailing list][], please prefix the subject line with `[TextMate]`.
+
+[Google Group]: http://groups.google.com/group/ipython-tmbundle/
+[IPython-dev mailing list]: http://projects.scipy.org/mailman/listinfo/ipython-dev "IPython-dev Info Page"
+
+
+Useful Links
+------------
 
   * [IPython bundle](http://github.com/mattfoster/ipython-tmbundle) on [GitHub](http://github.com/ "Secure Git hosting and collaborative development &mdash; GitHub")
   * [IPython Home](http://ipython.scipy.org "IPython")
   * [Scipy](http://www.scipy.org/ "SciPy")
-  
+
+<!--
+The bundle uses a socket-based server distributed with IPython to communicate with the interpreter. You will need a fairly recent version of IPython installed for the requisite editor server support to be included. You may also need to install Twisted in your Python environment -- in OS X Snow Leopard it is installed by default for the system Python.
+-->
+
+[Twisted]: http://twistedmatrix.com/trac/ "Twisted"
+

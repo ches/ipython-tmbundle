@@ -26,6 +26,10 @@ def remove_sockets(path=default_path):
     for sock in socks:
         os.remove(os.path.join(path, sock))
 
+# TODO: give priority to TM_IPYTHON_DEFAULT_SESSION -- would be nice if
+#       a user could, say, set up custom session initialization via
+#       ipython config files, then set the var at TM project level to
+#       attempt to handle multiple sessions
 def determine_socket(path=default_path):
     """Determine the socket with which to connect."""
     sockets = list_sockets(path)
@@ -46,6 +50,7 @@ def determine_socket(path=default_path):
 
     return os.path.join(path, sock)
         
+# TODO: implement sendlines here to make Twisted dependency optional!!
 def find_server_then_connect(lines):
     """Determine which socket to connect to, then send `lines`
     
@@ -56,4 +61,4 @@ def find_server_then_connect(lines):
     	return False
     else:
     	return sendlines(sock, lines)
-    
+
