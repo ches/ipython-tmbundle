@@ -17,6 +17,8 @@ open ~/.ipython/ipythonrc -a 'TextMate'
 	<string>Edit ipythonrc</string>
 	<key>output</key>
 	<string>discard</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>CCA5D37F-4070-4045-8A22-42A1B08D62AA</string>
 </dict>

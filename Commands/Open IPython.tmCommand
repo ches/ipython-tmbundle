@@ -38,7 +38,7 @@ notify_with_growl("IPython Script", 'Opened IPython')
 	<key>output</key>
 	<string>showAsTooltip</string>
 	<key>scope</key>
-	<string>source.python,</string>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>917DBCDD-450D-43C7-9AC5-B701A066CD4F</string>
 </dict>

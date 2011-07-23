@@ -36,7 +36,7 @@ else:
 	<key>output</key>
 	<string>afterSelectedText</string>
 	<key>scope</key>
-	<string>source.python,</string>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>661F94B3-543F-4FD6-BA06-02F03CAA88C7</string>
 </dict>

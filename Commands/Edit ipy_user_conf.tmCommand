@@ -17,6 +17,8 @@ open ~/.ipython/ipy_user_conf.py -a 'TextMate'
 	<string>Edit ipy_user_conf</string>
 	<key>output</key>
 	<string>discard</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>D6CFDC4F-4EAF-4778-BC29-16BF144B29CC</string>
 </dict>

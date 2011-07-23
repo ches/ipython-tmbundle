@@ -14,6 +14,8 @@
 	<string>IPython Homepage</string>
 	<key>output</key>
 	<string>discard</string>
+	<key>scope</key>
+	<string>source.python</string>
 	<key>uuid</key>
 	<string>C82225DB-9D99-4487-9A2D-CD013C422236</string>
 </dict>
