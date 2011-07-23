@@ -15,26 +15,17 @@ import dialog
 from ipythonMate import *
 import ipythonClient as client
 
-sock = client.determine_socket()
-if sock == None:
-	connected = False
-else:
-	connected = client.connect(sock)
-
-
-# Only notify if there was a problem.
-if connected: 
+# TODO: determine if we've turned off or on to tell the user :-)
+if client.find_server_then_connect('%pdb'):
 	notify_with_growl("IPython Script", 'Toggled pdb state')
-	client.send('quit')
-	client.disconnect()
 else:
-	notify_with_growl("IPython Script", 'Failed to connect to IPython session: ' + os.path.basename(sock))</string>
+	notify_with_growl("IPython Script", 'Failed to connect to IPython session')</string>
 	<key>input</key>
 	<string>none</string>
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Toggle pdb State</string>
+	<string>Toggle Auto-Debugging</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>
