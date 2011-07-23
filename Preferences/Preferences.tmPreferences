@@ -16,18 +16,6 @@
 				<key>value</key>
 				<string># </string>
 			</dict>
-			<dict>
-				<key>name</key>
-				<string>TM_IPYTHON_DEFAULT_SESSION</string>
-				<key>value</key>
-				<string>ipython-session</string>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>TM_IPYTHON_START_SERVER_COMMAND</string>
-				<key>value</key>
-				<string>import ipy_textmateserver; s = ipy_textmateserver.TextMateServer(); s.start()</string>
-			</dict>
 		</array>
 	</dict>
 	<key>uuid</key>
