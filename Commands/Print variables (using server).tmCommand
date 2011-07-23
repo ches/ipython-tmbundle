@@ -24,7 +24,7 @@ if not client.find_server_then_connect('%who'):
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Print variables</string>
+	<string>Print Variables</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

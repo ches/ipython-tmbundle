@@ -32,7 +32,7 @@ else:
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Remove sockets</string>
+	<string>Purge Sockets</string>
 	<key>output</key>
 	<string>afterSelectedText</string>
 	<key>scope</key>

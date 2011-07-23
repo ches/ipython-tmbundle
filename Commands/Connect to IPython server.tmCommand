@@ -45,7 +45,7 @@ else:
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Test connection to IPython server</string>
+	<string>Test Connection to IPython Server</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

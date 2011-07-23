@@ -37,7 +37,7 @@ else:
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Run file through profiler</string>
+	<string>Run File Through Profiler</string>
 	<key>output</key>
 	<string>afterSelectedText</string>
 	<key>scope</key>

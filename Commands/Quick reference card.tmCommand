@@ -23,7 +23,7 @@ html_footer
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Quick reference card</string>
+	<string>IPython Quick Reference</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

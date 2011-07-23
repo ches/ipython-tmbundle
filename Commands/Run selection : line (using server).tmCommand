@@ -31,7 +31,7 @@ else:
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Run selection / line</string>
+	<string>Run Selection / Line</string>
 	<key>output</key>
 	<string>afterSelectedText</string>
 	<key>scope</key>

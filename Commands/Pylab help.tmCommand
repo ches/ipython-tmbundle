@@ -23,7 +23,7 @@ html_footer
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Pylab help</string>
+	<string>Pylab Help</string>
 	<key>output</key>
 	<string>showAsHTML</string>
 	<key>scope</key>

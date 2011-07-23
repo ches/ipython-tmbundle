@@ -57,7 +57,7 @@ for line in lines[line_no:]:
 	<key>keyEquivalent</key>
 	<string>^C</string>
 	<key>name</key>
-	<string>Introduce variable (throughout)</string>
+	<string>Introduce Variable (Throughout)</string>
 	<key>output</key>
 	<string>replaceDocument</string>
 	<key>scope</key>

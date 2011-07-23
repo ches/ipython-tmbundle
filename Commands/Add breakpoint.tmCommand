@@ -28,7 +28,7 @@ notify_with_growl("IPython Script", text)</string>
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Add breakpoint</string>
+	<string>Add Breakpoint</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

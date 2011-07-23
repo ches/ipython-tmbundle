@@ -37,7 +37,7 @@ if not client.find_server_then_connect(text):
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Run selection / line through profiler</string>
+	<string>Run Selection / Line through Profiler</string>
 	<key>output</key>
 	<string>afterSelectedText</string>
 	<key>scope</key>

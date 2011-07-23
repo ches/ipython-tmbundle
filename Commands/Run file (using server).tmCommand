@@ -31,7 +31,7 @@ else:
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Run file</string>
+	<string>Run File</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

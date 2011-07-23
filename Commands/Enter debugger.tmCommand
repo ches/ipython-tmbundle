@@ -21,7 +21,7 @@ notify_with_growl("IPython Script", 'Entered debugger (pdb)')</string>
 	<key>input</key>
 	<string>none</string>
 	<key>name</key>
-	<string>Enter debugger</string>
+	<string>Start Post-mortem Debugger (AppleScript)</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

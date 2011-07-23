@@ -14,7 +14,7 @@ open ~/.ipython -a 'TextMate'
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Open config directory</string>
+	<string>Edit Config Directory</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

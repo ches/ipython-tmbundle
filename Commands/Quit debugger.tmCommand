@@ -23,7 +23,7 @@ notify_with_growl("IPython Script", 'Quit debugger (pdb)')</string>
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Quit debugger</string>
+	<string>Quit Debugger</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

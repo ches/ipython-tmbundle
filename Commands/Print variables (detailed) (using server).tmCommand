@@ -23,7 +23,7 @@ if not client.find_server_then_connect('%whos'):
 	<key>keyEquivalent</key>
 	<string>^I</string>
 	<key>name</key>
-	<string>Print variables (detailed)</string>
+	<string>Print Variables (Detailed)</string>
 	<key>output</key>
 	<string>discard</string>
 	<key>scope</key>

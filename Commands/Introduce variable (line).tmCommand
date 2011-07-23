@@ -37,7 +37,7 @@ for line in lines:
 	<key>keyEquivalent</key>
 	<string>^C</string>
 	<key>name</key>
-	<string>Introduce variable (line)</string>
+	<string>Introduce Variable (Line)</string>
 	<key>output</key>
 	<string>replaceDocument</string>
 	<key>scope</key>
